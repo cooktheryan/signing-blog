@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  labels:
+    tekton.dev/pipeline: image-build
+  name: image-build-demo
+  namespace: signing-test
+spec:
+  pipelineRef:
+    name: image-build
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+  - name: build
+    volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        volumeMode: Filesystem
+      status: {}
