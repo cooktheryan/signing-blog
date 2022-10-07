@@ -8,7 +8,7 @@ metadata:
 spec:
   pipelineRef:
     name: image-build
-  serviceAccountName: pipeline
+  serviceAccountName: pipeline-signing
   timeout: 1h0m0s
   workspaces:
   - name: build

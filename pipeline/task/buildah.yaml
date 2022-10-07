@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: buildah-commit-tag
+  namespace: signing-test
 spec:
   description: >-
     Buildah task builds source into a container image and then pushes it to a
@@ -68,6 +69,11 @@ spec:
           $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
           --tls-verify=$(params.TLSVERIFY) --no-cache \
           -f $(params.DOCKERFILE) -t $(params.IMAGE):$(params.TAG) $(params.CONTEXT)
+      securityContext:
+        capabilities:
+          add:
+            - SETFCAP
+
       volumeMounts:
         - mountPath: /var/lib/containers
           name: varlibcontainers
@@ -80,6 +86,10 @@ spec:
           $(params.PUSH_EXTRA_ARGS) --tls-verify=$(params.TLSVERIFY) \
           --digestfile $(workspaces.source.path)/image-digest $(params.IMAGE):$(params.TAG) \
           docker://$(params.IMAGE):$(params.TAG)
+      securityContext:
+        capabilities:
+          add:
+            - SETFCAP
       volumeMounts:
         - mountPath: /var/lib/containers
           name: varlibcontainers

@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: image-build 
+  namespace: signing-test
 spec:
   tasks:
   - name: git-clone
