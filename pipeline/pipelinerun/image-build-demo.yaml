@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   labels:
     tekton.dev/pipeline: image-build
-  name: image-build-demo
+  name: image-build-demo-2
   namespace: signing-test
 spec:
   pipelineRef:
@@ -21,5 +21,4 @@ spec:
         resources:
           requests:
             storage: 1Gi
-        volumeMode: Filesystem
       status: {}
