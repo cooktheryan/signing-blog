@@ -4,11 +4,11 @@ metadata:
   labels:
     tekton.dev/pipeline: image-build
   name: image-build-demo-2
-  namespace: signing-test
+  namespace: builder
 spec:
   pipelineRef:
     name: image-build
-  serviceAccountName: pipeline-signing
+  serviceAccountName: pipeline
   timeout: 1h0m0s
   workspaces:
   - name: build
